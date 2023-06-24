@@ -10,17 +10,17 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Menu Visbility
- * Plugin URI:        https://example.com/plugin-name
+ * Plugin URI:        https://github.com/sonvir249/menu-visibility
  * Description:       Control menu visibilty.
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            sonvir249
- * Author URI:        https://example.com
+ * Author URI:        https://github.com/sonvir249
  * Text Domain:       plugin-slug
  * License:           GPL v2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Update URI:        https://example.com/my-plugin/
+ * Update URI:        https://github.com/sonvir249/menu-visibility
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
