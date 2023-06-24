@@ -7,3 +7,7 @@
 - Hide/Display a menu for specific user role(s).
 
 > This repo is used only for development, downloading & installing from here won't work as expected. Install from [Menu Visibility](https://github.com/sonvir249/menu-visibility)
+
+## Screenshot:
+
+![Alt text](image.png)

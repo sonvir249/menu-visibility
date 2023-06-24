@@ -37,6 +37,7 @@ if ( ! class_exists( 'MenuVisibility' ) ) {
 				if ( ! empty( $this->global_settings['page_urls'] ) ) {
 					$page_urls = explode( PHP_EOL, $this->global_settings['page_urls'] );
 					foreach ( $page_urls as $page_url ) {
+            $page_url = preg_replace('/[\*\r]/', '', $page_url);
 						if ( str_contains( $current_url, $page_url ) ) {
 							$sorted_menu_objects = '';
 						}

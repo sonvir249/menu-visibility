@@ -209,6 +209,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 			$options = get_option( 'menu_visibility_page_urls' );
 			?>
 	  <textarea type="text" id="page_urls" name="menu_visibility_page_urls" rows="4" cols="50"><?php echo esc_html( $options ); ?></textarea>
+    <div>Specify pages by using their paths. Enter one path per line.<br/>The '*' character is a wildcard.<br/> An example path is <em class="placeholder">/movies/*</em> for every user page.</div>
 			<?php
 		}
 
