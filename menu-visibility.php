@@ -26,5 +26,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-require_once dirname( __FILE__ ) . '/classes/GlobalSettings.php';
-require_once dirname( __FILE__ ) . '/classes/MenuVisibility.php';
+require_once dirname( __FILE__ ) . '/classes/class-global-settings.php';
+require_once dirname( __FILE__ ) . '/classes/class-menu-visibility.php';

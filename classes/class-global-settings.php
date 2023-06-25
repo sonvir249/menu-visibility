@@ -1,12 +1,20 @@
 <?php
+/**
+ * Global settings for menu visibility.
+ *
+ * @package menu-visibility
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 
-if ( ! class_exists( 'GlobalSettings' ) ) {
-	class GlobalSettings {
+if ( ! class_exists( 'Global_Settings' ) ) {
+	/**
+	 * Global_Settings class.
+	 */
+	class Global_Settings {
 		/**
 		 * Autoload method
 		 *
@@ -134,7 +142,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 		/**
 		 * Menu fields callback.
 		 *
-		 * @param array $args
+		 * @param array $args Extra arguments.
 		 * @return void
 		 */
 		public function mv_field_menus_cb( $args ) {
@@ -147,7 +155,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 					?>
 		  <div>
 			<input type="checkbox" id="<?php echo esc_html( $menu->slug ); ?>" <?php echo esc_html( $checked ); ?> name="menu_visibility_menus[<?php echo esc_html( $menu->slug ); ?>]">
-			<label for="<?php echo esc_html( $menu->slug ); ?>"> <?php esc_html_e( $menu->name, 'menu_visibility_menus' ); ?> </label>
+			<label for="<?php echo esc_html( $menu->slug ); ?>"> <?php echo esc_html( $menu->name ); ?> </label>
 		  </div>
 					<?php
 				}
@@ -157,7 +165,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 		/**
 		 * Content Type field callback.
 		 *
-		 * @param array $args
+		 * @param array $args Extra arguments.
 		 * @return void
 		 */
 		public function mv_field_ct_cb( $args ) {
@@ -170,7 +178,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 					?>
 		  <div>
 			<input type="checkbox" id="<?php echo esc_html( $post_object->name ); ?>" <?php echo esc_html( $checked ); ?> name="menu_visibility_post_types[<?php echo esc_html( $post_object->name ); ?>]">
-			<label for="<?php echo esc_html( $post_object->name ); ?>"> <?php esc_html_e( $post_object->label, 'menu_visibility_post_types' ); ?> </label>
+			<label for="<?php echo esc_html( $post_object->name ); ?>"> <?php echo esc_html( $post_object->label ); ?> </label>
 		  </div>
 					<?php
 				}
@@ -180,7 +188,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 		/**
 		 * User roles field callback.
 		 *
-		 * @param array $args
+		 * @param array $args Extra arguments.
 		 * @return void
 		 */
 		public function mv_field_roles_cb( $args ) {
@@ -192,7 +200,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 				?>
 		<div>
 		  <input type="checkbox" id="<?php echo esc_html( $role_id ); ?>" <?php echo esc_html( $checked ); ?> name="menu_visibility_user_roles[<?php echo esc_html( $role_id ); ?>]">
-		  <label for="<?php echo esc_html( $role_id ); ?>"> <?php esc_html_e( $role['name'], 'menu_visibility_user_roles' ); ?> </label>
+		  <label for="<?php echo esc_html( $role_id ); ?>"> <?php echo esc_html( $role['name'] ); ?> </label>
 		</div>
 				<?php
 			}
@@ -201,7 +209,7 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 		/**
 		 * Page url field callback.
 		 *
-		 * @param array $args
+		 * @param array $args Extra arguments.
 		 * @return void
 		 */
 		public function mv_field_page_urls_cb( $args ) {
@@ -209,12 +217,12 @@ if ( ! class_exists( 'GlobalSettings' ) ) {
 			$options = get_option( 'menu_visibility_page_urls' );
 			?>
 	  <textarea type="text" id="page_urls" name="menu_visibility_page_urls" rows="4" cols="50"><?php echo esc_html( $options ); ?></textarea>
-    <div>Specify pages by using their paths. Enter one path per line.<br/>The '*' character is a wildcard.<br/> An example path is <em class="placeholder">/movies/*</em> for every user page.</div>
+	<div>Specify pages by using their paths. Enter one path per line.<br/>The '*' character is a wildcard.<br/> An example path is <em class="placeholder">/movies/*</em> for every movie page.</div>
 			<?php
 		}
 
 	}
 	if ( is_admin() ) {
-		$global_settings = new GlobalSettings();
+		$global_settings = new Global_Settings();
 	}
 } // class_exists() ends
