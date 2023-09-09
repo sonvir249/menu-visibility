@@ -10,11 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-if ( ! class_exists( 'Global_Settings' ) ) {
+if ( ! class_exists( 'MvGlobalSettings' ) ) {
 	/**
 	 * Global_Settings class.
 	 */
-	class Global_Settings {
+	class MvGlobalSettings {
 		/**
 		 * Autoload method
 		 *
@@ -22,8 +22,8 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 		 */
 		public function __construct() {
 			// Add admin menu.
-			add_action( 'admin_menu', array( $this, 'visibility_menu' ) );
-			add_action( 'admin_init', array( $this, 'visibility_menu_register_init' ) );
+			add_action( 'admin_menu', array( $this, 'mv_visibility_menu' ) );
+			add_action( 'admin_init', array( $this, 'mv_visibility_menu_register_init' ) );
 		}
 
 		/**
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 		 *
 		 * @return void
 		 */
-		public function visibility_menu() {
+		public function mv_visibility_menu() {
 			add_submenu_page(
 				'options-general.php',
 				'Menu Visibility',
@@ -49,20 +49,15 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 		 */
 		public function menu_visibility_page_callback() {
 			?>
-	  <form action="options.php" method="post">
-			<?php
+<form action="options.php" method="post">
+  <?php
 			settings_fields( 'menu_visibility_group' );
 			do_settings_sections( 'menu_visibility_group' );
 			?>
-		<input
-		  type="submit"
-		  name="submit"
-		  class="button button-primary"
-		  value="<?php esc_attr_e( 'Save' ); ?>"
-		/>
-	  </form>
+  <input type="submit" name="submit" class="button button-primary" value="<?php esc_attr_e( 'Save' ); ?>" />
+</form>
 
-			<?php
+<?php
 		}
 
 		/**
@@ -70,7 +65,7 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 		 *
 		 * @return void
 		 */
-		public function visibility_menu_register_init() {
+		public function mv_visibility_menu_register_init() {
 			// Register a new setting for "wporg" page.
 			register_setting( 'menu_visibility_group', 'menu_visibility_menus' );
 			register_setting( 'menu_visibility_group', 'menu_visibility_post_types' );
@@ -153,11 +148,12 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 				foreach ( $menus as $menu ) {
 					$checked = ( is_array( $options ) && in_array( $menu->slug, array_keys( $options ), true ) ) ? 'checked' : '';
 					?>
-		  <div>
-			<input type="checkbox" id="<?php echo esc_html( $menu->slug ); ?>" <?php echo esc_html( $checked ); ?> name="menu_visibility_menus[<?php echo esc_html( $menu->slug ); ?>]">
-			<label for="<?php echo esc_html( $menu->slug ); ?>"> <?php echo esc_html( $menu->name ); ?> </label>
-		  </div>
-					<?php
+<div>
+  <input type="checkbox" id="<?php echo esc_html( $menu->slug ); ?>" <?php echo esc_html( $checked ); ?>
+    name="menu_visibility_menus[<?php echo esc_html( $menu->slug ); ?>]">
+  <label for="<?php echo esc_html( $menu->slug ); ?>"> <?php echo esc_html( $menu->name ); ?> </label>
+</div>
+<?php
 				}
 			}
 		}
@@ -176,11 +172,12 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 				$checked     = ( is_array( $options ) && in_array( $post_object->name, array_keys( $options ), true ) ) ? 'checked' : '';
 				if ( $post_object->public ) {
 					?>
-		  <div>
-			<input type="checkbox" id="<?php echo esc_html( $post_object->name ); ?>" <?php echo esc_html( $checked ); ?> name="menu_visibility_post_types[<?php echo esc_html( $post_object->name ); ?>]">
-			<label for="<?php echo esc_html( $post_object->name ); ?>"> <?php echo esc_html( $post_object->label ); ?> </label>
-		  </div>
-					<?php
+<div>
+  <input type="checkbox" id="<?php echo esc_html( $post_object->name ); ?>" <?php echo esc_html( $checked ); ?>
+    name="menu_visibility_post_types[<?php echo esc_html( $post_object->name ); ?>]">
+  <label for="<?php echo esc_html( $post_object->name ); ?>"> <?php echo esc_html( $post_object->label ); ?> </label>
+</div>
+<?php
 				}
 			}
 		}
@@ -198,11 +195,12 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 			foreach ( $wp_roles->roles as $role_id => $role ) {
 				$checked = ( is_array( $options ) && in_array( $role_id, array_keys( $options ), true ) ) ? 'checked' : '';
 				?>
-		<div>
-		  <input type="checkbox" id="<?php echo esc_html( $role_id ); ?>" <?php echo esc_html( $checked ); ?> name="menu_visibility_user_roles[<?php echo esc_html( $role_id ); ?>]">
-		  <label for="<?php echo esc_html( $role_id ); ?>"> <?php echo esc_html( $role['name'] ); ?> </label>
-		</div>
-				<?php
+<div>
+  <input type="checkbox" id="<?php echo esc_html( $role_id ); ?>" <?php echo esc_html( $checked ); ?>
+    name="menu_visibility_user_roles[<?php echo esc_html( $role_id ); ?>]">
+  <label for="<?php echo esc_html( $role_id ); ?>"> <?php echo esc_html( $role['name'] ); ?> </label>
+</div>
+<?php
 			}
 		}
 
@@ -216,13 +214,15 @@ if ( ! class_exists( 'Global_Settings' ) ) {
 			// Get the value of the setting we've registered with register_setting().
 			$options = get_option( 'menu_visibility_page_urls' );
 			?>
-	  <textarea type="text" id="page_urls" name="menu_visibility_page_urls" rows="4" cols="50"><?php echo esc_html( $options ); ?></textarea>
-	<div>Specify pages by using their paths. Enter one path per line.<br/>The '*' character is a wildcard.<br/> An example path is <em class="placeholder">/movies/*</em> for every movie page.</div>
-			<?php
+<textarea type="text" id="page_urls" name="menu_visibility_page_urls" rows="4"
+  cols="50"><?php echo esc_html( $options ); ?></textarea>
+<div>Specify pages by using their paths. Enter one path per line.<br />The '*' character is a wildcard.<br /> An example
+  path is <em class="placeholder">/movies/*</em> for every movie page.</div>
+<?php
 		}
 
 	}
 	if ( is_admin() ) {
-		$global_settings = new Global_Settings();
+		$global_settings = new MvGlobalSettings();
 	}
 } // class_exists() ends

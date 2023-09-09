@@ -1,30 +1,34 @@
 <?php
-/**
- * Menu Visibilty
- *
- * @package           Menu Visibilty
- * @author            sonvir249
- * @copyright         2023 sonvir249
- * @license           GPL-2.0-or-later
- *
- * @wordpress-plugin
- * Plugin Name:       Menu Visbility
- * Plugin URI:        https://github.com/sonvir249/menu-visibility
- * Description:       Control menu visibilty.
- * Version:           1.0.0
- * Requires at least: 5.2
- * Requires PHP:      7.2
- * Author:            sonvir249
- * Author URI:        https://github.com/sonvir249
- * Text Domain:       plugin-slug
- * License:           GPL v2 or later
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Update URI:        https://github.com/sonvir249/menu-visibility
- */
+/*
+Plugin Name: Menu Visibility
+Version: 1.0
+Author: sonvir249
+Author URI: https://github.com/sonvir249
+Description: Menu visibility plugin provides option to control the menu visibility.
+License:GPL2
+License URI:https://www.gnu.org/licenses/gpl-2.0.html
+*/
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-require_once dirname( __FILE__ ) . '/classes/class-global-settings.php';
-require_once dirname( __FILE__ ) . '/classes/class-menu-visibility.php';
+// Make sure we don't expose any info if called directly.
+
+if (!function_exists('add_action') ) {
+  echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
+  exit;
+}
+
+define('MV_VERSION', '5.5.6');
+
+define('MV_REQUIRED_WP_VERSION', '5.7');
+
+define('MV_PLUGIN', __FILE__);
+
+define('MV_PLUGIN_BASENAME', plugin_basename(MV_PLUGIN));
+
+define('MV_PLUGIN_DIR', untrailingslashit(dirname(MV_PLUGIN)));
+
+require_once MV_PLUGIN_DIR . '/classes/MvGlobalSettings.php';
+require_once MV_PLUGIN_DIR . '/classes/MvMain.php';

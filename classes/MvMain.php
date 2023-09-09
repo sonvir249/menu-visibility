@@ -1,6 +1,6 @@
 <?php
 /**
- * Menu visbility.
+ * Menu visibility.
  *
  * @package menu-visibility
  */
@@ -9,11 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'Menu_Visibility' ) ) {
+if ( ! class_exists( 'MvMain' ) ) {
 	/**
 	 * Menu_Visibility class
 	 */
-	class Menu_Visibility {
+	class MvMain {
 		/**
 		 * Global settings array
 		 *
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Menu_Visibility' ) ) {
 			$this->global_settings['selected_post_types'] = get_option( 'menu_visibility_post_types' );
 			$this->global_settings['selected_user_roles'] = get_option( 'menu_visibility_user_roles' );
 			$this->global_settings['page_urls']           = get_option( 'menu_visibility_page_urls' );
-			add_filter( 'wp_nav_menu_objects', array( $this, 'ad_filter_menu' ), 10, 2 );
+			add_filter( 'wp_nav_menu_objects', array( $this, 'mv_ad_filter_menu' ), 10, 2 );
 		}
 		/**
 		 * Helper method for filter menu.
@@ -37,7 +37,7 @@ if ( ! class_exists( 'Menu_Visibility' ) ) {
 		 * @param array $args exta args.
 		 * @return mixed
 		 */
-		public function ad_filter_menu( $sorted_menu_objects, $args ) {
+		public function mv_ad_filter_menu( $sorted_menu_objects, $args ) {
 			global $wp;
 			global $wp_query;
 
@@ -74,5 +74,5 @@ if ( ! class_exists( 'Menu_Visibility' ) ) {
 		}
 	}
 
-	$menu_visibility = new Menu_Visibility();
+	$menu_visibility = new MvMain();
 } // class_exists() ends
