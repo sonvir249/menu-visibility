@@ -30,5 +30,5 @@ define('MV_PLUGIN_BASENAME', plugin_basename(MV_PLUGIN));
 
 define('MV_PLUGIN_DIR', untrailingslashit(dirname(MV_PLUGIN)));
 
-require_once MV_PLUGIN_DIR . '/classes/MvGlobalSettings.php';
-require_once MV_PLUGIN_DIR . '/classes/MvMain.php';
+require_once MV_PLUGIN_DIR . '/classes/class-mvglobalsettings.php';
+require_once MV_PLUGIN_DIR . '/classes/class-mvmain.php';
